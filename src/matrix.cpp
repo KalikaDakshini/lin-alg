@@ -1,5 +1,6 @@
 #include "matrix.h"
 
+// Constructor to copy elements from vector of elements
 Matrix::Matrix(const std::vector<std::vector<double>> &elems) :
   _rows(elems.size()), _cols(elems[0].size()), _elems([&] {
     std::vector<double> flat;
@@ -15,12 +16,22 @@ Matrix::Matrix(const std::vector<std::vector<double>> &elems) :
   }())
 {}
 
+// Overload output opertor to print matrix
 std::ostream &operator<<(std::ostream &out, const Matrix &mat)
 {
+  // Print the size of the matrix
+  out << "Size: " << mat.rows() << 'x' << mat.cols() << '\n';
+
+  // Print the contents of the matrix
   for (size_t i = 0; i < mat.rows(); i++) {
     out << "[";
     for (size_t j = 0; j < mat.cols(); j++) {
-      out << mat.get(i, j) << ", ";
+      if (j == mat.cols() - 1) {
+        out << mat.get(i, j);
+      }
+      else {
+        out << mat.get(i, j) << ", ";
+      }
     }
     out << "]\n";
   }
@@ -28,6 +39,7 @@ std::ostream &operator<<(std::ostream &out, const Matrix &mat)
   return out;
 }
 
+// Perform matrix addition
 Matrix operator+(const Matrix &mat1, const Matrix &mat2)
 {
   if (mat1.rows() != mat2.rows() || mat1.cols() != mat2.cols()) {
@@ -45,6 +57,7 @@ Matrix operator+(const Matrix &mat1, const Matrix &mat2)
   return result;
 }
 
+// Perform scalar multiplication
 Matrix operator*(const Matrix &mat, double val)
 {
   Matrix result = Matrix(mat.rows(), mat.cols());
@@ -58,6 +71,7 @@ Matrix operator*(const Matrix &mat, double val)
   return result;
 }
 
+// Perform matrix multiplication
 Matrix operator*(const Matrix &mat1, const Matrix &mat2)
 {
   // Check dimensions

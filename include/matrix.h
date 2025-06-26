@@ -17,6 +17,10 @@ public:
     _rows(rows), _cols(cols), _elems(_rows * _cols, 0.0)
   {}
 
+  Matrix(size_t rows, size_t cols, std::vector<double> elems) :
+    _rows(rows), _cols(cols), _elems(elems)
+  {}
+
   Matrix(const std::vector<std::vector<double>> &elems);
 
   // Accessor methods
@@ -49,5 +53,21 @@ public:
    */
   friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
 };
+
+// Operator overloading
+/**
+ * @brief Adds two matrices, element-wise
+ */
+Matrix operator+(const Matrix &mat1, const Matrix &mat2);
+
+/**
+ * @brief Performs scalar multiplication with a matrix
+ */
+Matrix operator*(const Matrix &mat1, double val);
+
+/**
+ * @brief Performs matrix multiplication. O(n^3) complexity
+ */
+Matrix operator*(const Matrix &mat1, const Matrix &mat2);
 
 #endif

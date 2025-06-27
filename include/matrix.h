@@ -59,31 +59,25 @@ public:
    */
   Row &row(size_t i) { return _data[i]; }
 
-  // Overload output operator
-  friend std::ostream &operator<<(std::ostream &out, const Matrix &mat)
-  {
-    // Print the size
-    out << "Size: " << mat._rows << 'x' << mat._cols << '\n';
+  // Iterator
+  auto begin() { return this->_data.begin(); }
 
-    // Print the elements
-    for (size_t i = 0; i < mat._rows; i++) {
-      for (size_t j = 0; j < mat._cols; ++j) {
-        if (j == mat._cols - 1) {
-          out << mat._data[i][j];
-        }
-        else {
-          out << mat._data[i][j] << ", ";
-        }
-      }
-      out << "\n";
-    }
-    return out;
-  }
+  auto end() { return this->_data.end(); }
+
+  // Overload output operator
+  friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
 };
 
-// Operator overloads
+// Operator overloads for Matrix
 Matrix operator+(const Matrix &mat1, const Matrix &mat2);
 Matrix operator*(const Matrix &mat1, const Matrix &mat2);
 Matrix operator*(const Matrix &mat, double val);
+
+// Operator overloads for Row
+Row operator+(const Row &row1, const Row &row2);
+Row operator-(const Row &row1, const Row &row2);
+Row operator*(const Row &row, double val);
+Row operator/(const Row &row, double val);
+std::ostream &operator<<(std::ostream &out, const Row &r);
 
 #endif

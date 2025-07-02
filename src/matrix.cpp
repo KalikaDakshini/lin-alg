@@ -2,6 +2,22 @@
 
 // ========== Matrix Functions ========== //
 
+// Elementary Row Operations
+void Matrix::swap(size_t i, size_t j)
+{
+  std::swap(this->_data[i], this->_data[j]);
+}
+
+void Matrix::scale(size_t i, double scale)
+{
+  this->_data[i] = this->_data[i] * scale;
+}
+
+void Matrix::add(size_t i, size_t j, double scale)
+{
+  this->_data[i] = this->_data[i] + this->_data[j] * scale;
+}
+
 // Overload output stream
 std::ostream &operator<<(std::ostream &out, const Matrix &mat)
 {

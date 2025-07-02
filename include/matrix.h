@@ -1,6 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -58,6 +59,22 @@ public:
    * @brief Return a reference to the ith row
    */
   Row &row(size_t i) { return _data[i]; }
+
+  // Elementary Row Operations
+  /**
+   * @brief Swap Row i and Row j
+   */
+  void swap(size_t i, size_t j);
+
+  /**
+   * @brief Multiply Row i by a factor of scl
+   */
+  void scale(size_t i, double scale);
+
+  /**
+   * @brief Add and modify rows as Ri = Ri + scale * Rj
+   */
+  void add(size_t i, size_t j, double scale);
 
   // Iterator
   auto begin() { return this->_data.begin(); }

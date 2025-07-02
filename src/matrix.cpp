@@ -25,16 +25,8 @@ std::ostream &operator<<(std::ostream &out, const Matrix &mat)
   out << "Size: " << mat._rows << 'x' << mat._cols << '\n';
 
   // Print the elements
-  for (size_t i = 0; i < mat._rows; i++) {
-    for (size_t j = 0; j < mat._cols; ++j) {
-      if (j == mat._cols - 1) {
-        out << mat._data[i][j];
-      }
-      else {
-        out << mat._data[i][j] << ", ";
-      }
-    }
-    out << "\n";
+  for (const auto &row : mat) {
+    out << row << '\n';
   }
   return out;
 }
@@ -149,9 +141,17 @@ Row operator/(const Row &row, double val)
 // Overload output stream
 std::ostream &operator<<(std::ostream &out, const Row &row)
 {
+  // Set precision to 2
+  out << std::fixed;
+  out << std::setprecision(2);
   out << "[";
-  for (const auto &elem : row) {
-    out << elem << ", ";
+  for (size_t i = 0; i < row.size(); i++) {
+    if (i == row.size() - 1) {
+      out << std::setw(6) << row[i];
+    }
+    else {
+      out << std::setw(6) << row[i] << ", ";
+    }
   }
 
   out << "]";

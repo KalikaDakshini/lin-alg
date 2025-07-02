@@ -7,7 +7,7 @@
 /**
  * @brief Return an upper traingular matrix reduced using gaussian elimination
  */
-Matrix gaussian_elimination(const Matrix &mat);
+Matrix rref(const Matrix &mat);
 
 /**
  * @brief Return the rank of the matrix using Gaussian elimination

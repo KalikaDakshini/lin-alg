@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <vector>
 
@@ -80,6 +81,10 @@ public:
   auto begin() { return this->_data.begin(); }
 
   auto end() { return this->_data.end(); }
+
+  auto begin() const { return this->_data.begin(); }
+
+  auto end() const { return this->_data.end(); }
 
   // Overload output operator
   friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
